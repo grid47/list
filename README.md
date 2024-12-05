@@ -1,5 +1,5 @@
 | Q.No. | Category | Question |
-| --- | --- | --- |
+| --- | --- | --- | 
 | 1 | Easy | [Two Sum](https://grid47.xyz/leetcode/solution-1-two-sum/) |
 | 2 | Medium | [Add Two Numbers](https://grid47.xyz/leetcode/solution-2-add-two-numbers/) |
 | 3 | Medium | [Longest Substring Without Repeating Characters](https://grid47.xyz/leetcode/solution-3-longest-substring-without-repeating-characters/) |
