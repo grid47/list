@@ -6,39 +6,34 @@ type = "main"
 
 
 
-Ready to crack coding interviews and ace problem-solving?
+# Ready to Crack Coding Interviews and Ace Problem-Solving? 🚀
 
-Join my Algorithms course on Udemy:
+**Join my [Algorithms](https://udemy.com/course/algorithms-and-data-structures-in-cpp/) Course on Udemy!**  
 
-🌟 Highlights:
+## 🌟 Highlights:  
 
-Solve Using LeetCode Lab 👨‍🚀
+- **Solve Using LeetCode Lab** 👨‍🚀  
+- **~5+ hours** of condensed, value-packed learning!  
+- **20 Patterns** with actionable templates.  
+- **10 Sections** covering foundational to advanced concepts.  
+- **~6 Problems/Pattern** for hands-on practice.  
+- **120+ Problems** curated from LeetCode! 🏆  
+- **Template-Based Learning** for every pattern.  
+- Granular **Logical Differences** between consecutive problems to help you ace the pace! 🚀  
 
-~5+ hours of condensed, value-packed learning!
+## 🛠 Master Core Topics:  
+| Array | String | Linked List | Tree | BST | Graph | Matrix | DP | Heap |  
 
-20 Patterns with actionable templates.
+---
 
-10 Sections covering foundational to advanced concepts.
+### Don’t miss this chance to elevate your skills—enrol now and start coding smarter today! 💻✨  
 
-~6 Problems/Pattern for hands-on practice.
+🎯 **[Join Now!](https://udemy.com/course/algorithms-and-data-structures-in-cpp/)**  
 
-120+ Problems curated from LeetCode! 🏆
-
-Template-Based Learning for every pattern.
-
-Granular Logical Differences between consecutive problems to help you ace the pace! 🚀
-
-🛠 Master Core Topics: | Array | String | Linked List | Tree | BST | Graph | Matrix | DP | Heap |
-
-
-
-Don’t miss this chance to elevate your skills—enrol now and start coding smarter today! 💻✨
-
-🎯 Join Now! ➡️
 
 
 {{< udemy 
-    title="Algorithms and Data Structures in C++"
+    title="Algorithms"
     instructor="Mohammed Yasir Eramangadan"
     image="https://img-b.udemycdn.com/course/240x135/5837150_7e12_10.jpg"
     rating="4.1"
