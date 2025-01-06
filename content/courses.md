@@ -46,4 +46,4 @@ type = "main"
     description="Kickstart your DSA journey with expert-crafted templates, helpful nudges, and a seamless problem-solving flow!"
 >}}
 
-Coupen: {{< clip "coupen" >}} 
+Coupon: {{< clip "coupen" >}} 
