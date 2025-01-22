@@ -35,7 +35,7 @@ type = "main"
 {{< udemy 
     title="Algorithms"
     instructor="Mohammed Yasir Eramangadan"
-    image="https://img-b.udemycdn.com/course/240x135/5837150_7e12_10.jpg"
+    image="https://img-c.udemycdn.com/course/240x135/5837150_7e12_10.jpg"
     rating="4.1"
     reviews="12"
     hours="4.5"
