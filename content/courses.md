@@ -30,7 +30,7 @@ type = "main"
 
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/stl_img.webp" 
-    alt="LeetCode heatmap."
+    alt="LeetCode workout cheatsheet."
     caption=""
     width="900px"
     borderRadius="8px"
