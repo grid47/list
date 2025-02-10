@@ -26,6 +26,20 @@ type = "main"
 
 ---
 
+## 🛠 Use this Workout Cheat Sheet:  
+
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/stl_img.webp" 
+    alt="LeetCode heatmap."
+    caption=""
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
+
+---
+
 ### Don’t miss this chance to elevate your skills—enrol now and start coding smarter today! 💻✨  
 
 🎯 **[Join Now!](https://udemy.com/course/algorithms-and-data-structures-in-cpp/)**  
