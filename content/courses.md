@@ -62,4 +62,4 @@ Search for the following problem numbers in the [LeetCode problem set](https://l
     description="Kickstart your DSA journey with expert-crafted templates, helpful nudges, and a seamless problem-solving flow!"
 >}}
 
-Coupon: {{< clip "coupen" >}} 
+Coupon: "You can preview the entire course at no cost." {{< clip "coupen" >}} 
