@@ -28,7 +28,7 @@ type = "main"
 
 ## 🛠 Use this Workout Cheat Sheet:  
 
-Search for below number at (Leetcode problem set)[https://leetcode.com/problemset/]
+Search for the following problem numbers in the [LeetCode problem set](https://leetcode.com/problemset/)
 
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/stl_img.webp" 
