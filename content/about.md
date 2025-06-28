@@ -19,7 +19,7 @@ type = "main"
 
 {{< dots >}}
 
-Welcome to my LeetCode solutions blog! 🎉 Here, I follow a structured approach to provide clarity and depth in solving coding problems. Each post adheres to a well-defined schema, ensuring every aspect of the problem is covered comprehensively. Here’s how the schema breaks down:
+Welcome to Mohammed Yasir Eramangadan's LeetCode solutions blog! 🎉 Here, I follow a structured approach to provide clarity and depth in solving coding problems. Each post adheres to a well-defined schema, ensuring every aspect of the problem is covered comprehensively. Here’s how the schema breaks down:
 
 {{< dots >}}
 
