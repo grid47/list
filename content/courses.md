@@ -76,18 +76,5 @@ Search for the following problem numbers in the [LeetCode problem set](https://l
     description="Kickstart your DSA journey with expert-crafted templates, helpful nudges, and a seamless problem-solving flow!"
 >}}
 
-{{< udemy 
-    title="Blind 75"
-    instructor="Mohammed Yasir Eramangadan"
-    image="https://img-c.udemycdn.com/course/240x135/5837150_7e12_10.jpg"
-    rating="0"
-    reviews="0"
-    hours="10.5"
-    lectures="158"
-    level="All Levels"
-    price="As Per Udemy ~4usd"
-    url="https://www.udemy.com/course/blind-75/"
-    description="Master DSA with Blind75: Crafted by a former Meta engineer, with clear strategies and a focused approach!"
->}}
 
 Coupon: {{< clip "coupen" >}} 
