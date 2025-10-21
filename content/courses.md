@@ -49,19 +49,45 @@ Search for the following problem numbers in the [LeetCode problem set](https://l
 
 
 {{< udemy 
-    title="Algorithms"
+    title="C++ STL for LeetCode"
     instructor="Mohammed Yasir Eramangadan"
     image="https://img-c.udemycdn.com/course/240x135/5837150_7e12_10.jpg"
-    rating="4.1"
-    reviews="12"
-    hours="4.5"
-    lectures="41"
+    rating="3.2"
+    reviews="5"
+    hours="2"
+    lectures="11"
     level="All Levels"
-    price="799"
+    price="FREE"
+    url="https://www.udemy.com/course/cpp-stl-for-cp/"
+    description="The C++ Standard Template Library (STL) essentials for solving LeetCode problems."
+>}}
+
+{{< udemy 
+    title="LeetCode-DSA Patterns"
+    instructor="Mohammed Yasir Eramangadan"
+    image="https://img-c.udemycdn.com/course/240x135/5837150_7e12_10.jpg"
+    rating="3.8"
+    reviews="15"
+    hours="6"
+    lectures="42"
+    level="All Levels"
+    price="As Per Udemy"
     url="https://udemy.com/course/algorithms-and-data-structures-in-cpp/"
     description="Kickstart your DSA journey with expert-crafted templates, helpful nudges, and a seamless problem-solving flow!"
 >}}
 
-Coupon: {{< clip "coupen" >}} 
+{{< udemy 
+    title="Blind 75"
+    instructor="Mohammed Yasir Eramangadan"
+    image="https://img-c.udemycdn.com/course/240x135/5837150_7e12_10.jpg"
+    rating="0"
+    reviews="0"
+    hours="10.5"
+    lectures="158"
+    level="All Levels"
+    price="As Per Udemy ~4usd"
+    url="https://www.udemy.com/course/blind-75/"
+    description="Master DSA with Blind75: Crafted by a former Meta engineer, with clear strategies and a focused approach!"
+>}}
 
-This is not a 911 course.
+Coupon: {{< clip "coupen" >}} 
