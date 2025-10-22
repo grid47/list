@@ -1,5 +1,5 @@
 +++
-title = "Course"
+title = "Courses"
 slug = "courses"
 type = "main"
 +++
