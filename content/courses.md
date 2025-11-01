@@ -49,7 +49,7 @@ Search for the following problem numbers in the [LeetCode problem set](https://l
 
 
 {{< udemy 
-    title="C++ STL for LeetCode"
+    title="C++ STL with LeetCode"
     instructor="Mohammed Yasir Eramangadan"
     image="https://img-c.udemycdn.com/course/240x135/5837150_7e12_10.jpg"
     rating="3.2"
@@ -63,7 +63,7 @@ Search for the following problem numbers in the [LeetCode problem set](https://l
 >}}
 
 {{< udemy 
-    title="LeetCode-DSA Patterns"
+    title="Data Structures and Algorithms using C++"
     instructor="Mohammed Yasir Eramangadan"
     image="https://img-c.udemycdn.com/course/240x135/5837150_7e12_10.jpg"
     rating="3.8"
