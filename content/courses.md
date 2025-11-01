@@ -59,7 +59,7 @@ Search for the following problem numbers in the [LeetCode problem set](https://l
     level="All Levels"
     price="FREE"
     url="https://www.udemy.com/course/cpp-stl-for-cp/"
-    description="The C++ Standard Template Library (STL) essentials for solving LeetCode problems."
+    description="3 Sections | 9 Topics | 23 Problems | C++ Standard Template Library | Powered by LeetCode"
 >}}
 
 {{< udemy 
@@ -73,7 +73,7 @@ Search for the following problem numbers in the [LeetCode problem set](https://l
     level="All Levels"
     price="As Per Udemy"
     url="https://udemy.com/course/algorithms-and-data-structures-in-cpp/"
-    description="Kickstart your DSA journey with expert-crafted templates, helpful nudges, and a seamless problem-solving flow!"
+    description="20 Core Patterns | 120+ Practice Problems | From C++ STL to Dynamic Programming | Powered by LeetCode"
 >}}
 
 
