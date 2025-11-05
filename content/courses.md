@@ -49,7 +49,7 @@ Search for the following problem numbers in the [LeetCode problem set](https://l
 
 
 {{< udemy 
-    title="C++ STL with LeetCode"
+    title="Basics of C++ Standard Template Library"
     instructor="Mohammed Yasir Eramangadan"
     image="https://img-c.udemycdn.com/course/240x135/5837150_7e12_10.jpg"
     rating="3.2"
