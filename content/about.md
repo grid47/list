@@ -109,3 +109,6 @@ A detailed analysis of the algorithm's efficiency.
 {{< dots >}}
 
 This schema ensures that every post delivers not only a solution but also an in-depth understanding of the problem and approach. Dive in and explore! 🌟
+ 
+
+[Start - Problem 1](https://grid47.xyz/leetcode/solution-1-two-sum/)
